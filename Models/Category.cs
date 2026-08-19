@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Zeiss_Api.Models
+namespace zeiss_api.Models
 {
     public class Category
     {

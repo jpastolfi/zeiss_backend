@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Zeiss_Api.Models;
+using zeiss_api.Models;
 
-namespace Zeiss_Api.Data
+namespace zeiss_api.Data
 {
     public class ApplicationDbContext : DbContext
     {

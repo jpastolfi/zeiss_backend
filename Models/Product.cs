@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Zeiss_Api.Models
+namespace zeiss_api.Models
 {
     public class Product
     {
