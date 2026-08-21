@@ -12,7 +12,7 @@ namespace zeiss_api.Services
         public Task<ProductResponseDto> CreateProductAsync(CreateProductDto product);
         public Task<ProductResponseDto> IncrementProductStockAsync(int productId, int quantity);
         public Task<ProductResponseDto> DecrementProductStockAsync(int productId, int quantity);
-        public Task<ProductResponseDto> UpdateProductAsync(UpdateProductDto product);
+        public Task<ProductResponseDto> UpdateProductAsync(int productId, UpdateProductDto dto);
         public Task<ProductResponseDto> DeleteProductAsync(int productId);
     }
 }

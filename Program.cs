@@ -15,21 +15,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddExceptionHandler<AppExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddScoped<IProductService, ProductService>();
-var app = builder.Build();
-app.UseExceptionHandler();
+builder.Services.AddControllers();
 
+var app = builder.Build();
+
+app.UseExceptionHandler();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
 app.UseHttpsRedirection();
-
-app.MapPost("/test/create-product", async (
-    [FromServices] IProductService service,
-    [FromBody]
-    CreateProductDto dto) => 
-    await service.CreateProductAsync(dto));
-
+app.MapControllers();
 app.Run();
