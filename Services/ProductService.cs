@@ -1,10 +1,8 @@
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using zeiss_api.Data;
 using zeiss_api.DTOs;
 using zeiss_api.Exceptions;
 using zeiss_api.Models;
-using zeiss_api.Services;
 
 namespace zeiss_api.Services
 {
@@ -33,9 +31,8 @@ namespace zeiss_api.Services
         {
             var products = await _context.Products
                 .Include(p => p.Category)
-                .Where(p => p.Name.Contains(productName))
+                .Where(p => p.Name.ToLower().Contains(productName.ToLower()))
                 .ToListAsync();
-            
             return products.Select(p => new ProductResponseDto
             {
                 Id = p.Id,
@@ -99,7 +96,6 @@ namespace zeiss_api.Services
                     try
                     {
                         await _context.SaveChangesAsync();
-                        Console.WriteLine("It worked!");
                         ProductResponseDto response = new()
                         {
                             Id = newProduct.Id,
@@ -122,7 +118,7 @@ namespace zeiss_api.Services
                 .FirstOrDefaultAsync(p => p.Id == productId) ??
                 throw new ProductNotFoundException(productId);
 
-            if (int.MaxValue - quantity > product.Stock)
+            if (quantity > int.MaxValue - product.Stock)
                 throw new StockOverflowException(productId, product.Stock, quantity);
             product.Stock += quantity;
             await _context.SaveChangesAsync();
