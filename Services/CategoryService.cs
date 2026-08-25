@@ -1,20 +1,16 @@
-using zeiss_api.Services;
-using zeiss_api.DTOs;
 using zeiss_api.Models;
+using zeiss_api.Data;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace zeiss_api.Services
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService(ApplicationDbContext context) : ICategoryService
     {
-        public Task<Category> CreateCategoryAsync(CreateCategoryDto createCategoryDto)
+        private readonly ApplicationDbContext _context = context;
+        public async Task<List<Category>> GetCategoriesAsync()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Category>> GetCategoriesAsync()
-        {
-            throw new NotImplementedException();
+            return await _context.Categories.ToListAsync();
         }
     }
 }

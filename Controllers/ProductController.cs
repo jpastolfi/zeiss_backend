@@ -1,4 +1,3 @@
-using System.Diagnostics.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using zeiss_api.DTOs;
 using zeiss_api.Models;
